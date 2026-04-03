@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamHouseAI - Premium House Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    
+    <div class="container">
+        <header>
+            <h1>DreamHouse<span style="color: #c084fc;">AI</span></h1>
+            <p class="subtitle">Next-generation real estate valuation powered by machine learning.</p>
+        </header>
+
+        <div class="glass-card">
+            <form id="predictionForm" class="form-grid">
+                <!-- Row 1 -->
+                <div class="input-group">
+                    <label for="bedrooms">Bedrooms (Total)</label>
+                    <input type="number" id="bedrooms" name="bedrooms" placeholder="e.g. 129" value="129" required>
+                </div>
+                <div class="input-group">
+                    <label for="rooms">Total Rooms (Sq Ft Proxy)</label>
+                    <input type="number" id="rooms" name="rooms" placeholder="e.g. 880" value="880" required>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="input-group">
+                    <label for="income">Median Income (in $10,000s)</label>
+                    <input type="number" step="0.01" id="income" name="income" placeholder="e.g. 8.32" value="8.32" required>
+                </div>
+                <div class="input-group">
+                    <label for="age">Housing Median Age</label>
+                    <input type="number" id="age" name="age" placeholder="e.g. 41" value="41" required>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="input-group">
+                    <label for="latitude">Latitude</label>
+                    <input type="number" step="0.01" id="latitude" name="latitude" placeholder="37.88" value="37.88" required>
+                </div>
+                <div class="input-group">
+                    <label for="longitude">Longitude</label>
+                    <input type="number" step="0.01" id="longitude" name="longitude" placeholder="-122.23" value="-122.23" required>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="input-group">
+                    <label for="proximity">Ocean Proximity</label>
+                    <select id="proximity" name="proximity" required>
+                        <option value="NEAR BAY">Near Bay</option>
+                        <option value="<1H OCEAN">&lt;1H Ocean</option>
+                        <option value="INLAND">Inland</option>
+                        <option value="NEAR OCEAN">Near Ocean</option>
+                        <option value="ISLAND">Island</option>
+                    </select>
+                </div>
+                <!-- Hidden fields for model completeness -->
+                <input type="hidden" id="population" name="population" value="322">
+                <input type="hidden" id="households" name="households" value="126">
+
+                <button type="submit" class="btn-predict">Predict Market Value</button>
+            </form>
+
+            <div id="result" class="result-container">
+                <p class="subtitle" style="font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Current Market Valuation</p>
+                <div id="priceValue" class="price-display">$0.00</div>
+                
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <p style="margin-bottom: 2rem; color: var(--text-muted); line-height: 1.6;">Our AI has analyzed the local market trends and property features. This estimate represents the current high-confidence market value.</p>
+                    <button id="acceptBtn" class="btn-predict" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">Accept Valuation & Contact Agent</button>
+                </div>
+
+                <div id="contactDetails" class="contact-section">
+                    <div class="agent-card">
+                        <div class="agent-avatar" id="agentInitial">S</div>
+                        <div class="agent-info">
+                            <h3 id="agentName" style="color: var(--text-main);">Sarah Mitchell</h3>
+                            <p id="agentAgency" style="font-size: 0.9rem; color: var(--primary);">Elegance Luxury Realty</p>
+                            <div style="margin-top: 10px;">
+                                <p id="agentPhone" style="font-size: 0.85rem; color: var(--text-muted);">📞 +1 (555) 012-3456</p>
+                                <p id="agentEmail" style="font-size: 0.85rem; color: var(--text-muted);">✉️ sarah.m@elegancerealty.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
